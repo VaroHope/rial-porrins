@@ -2,103 +2,112 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Rial Porrins Punta Cana</title>
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
-/* Estilo Apple: fondo gris claro, tarjetas blancas, tipografía del sistema, un solo acento azul. Siempre claro. */
+/* Estilo Apple modo oscuro: negro puro, tarjetas gris grafito, mucho aire, un acento azul. */
 :root {
-  --bg: #f5f5f7;
-  --surface: #ffffff;
-  --ink: #1d1d1f;
-  --muted: #6e6e73;
-  --line: #e5e5ea;
-  --accent: #0071e3;
-  --accent-soft: #e8f1fc;
-  --good: #248a3d; --good-soft: #e3f4e7;
-  --warn: #b25000; --warn-soft: #fdf0e3;
-  --bad: #d70015; --bad-soft: #fde7e9;
-  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+  --bg: #000000;
+  --surface: #1c1c1e;
+  --surface-2: #2c2c2e;
+  --ink: #f5f5f7;
+  --muted: #86868b;
+  --line: #38383a;
+  --accent: #2997ff;
+  --accent-soft: rgba(41,151,255,0.14);
+  --good: #30d158; --good-soft: rgba(48,209,88,0.14);
+  --warn: #ff9f0a; --warn-soft: rgba(255,159,10,0.14);
+  --bad: #ff453a; --bad-soft: rgba(255,69,58,0.14);
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter", "Helvetica Neue", Arial, sans-serif;
   --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Helvetica Neue", Arial, sans-serif;
-  color-scheme: light;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.47 var(--font); letter-spacing: -0.01em; -webkit-font-smoothing: antialiased; }
-main { max-width: 680px; margin: 0 auto; padding: max(28px, env(safe-area-inset-top)) 16px 48px; display: grid; gap: 14px; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.5 var(--font); letter-spacing: -0.012em; -webkit-font-smoothing: antialiased; }
+main { max-width: 720px; margin: 0 auto; padding: 0 20px 80px; display: grid; gap: 20px; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-.top { text-align: center; padding: 18px 0 10px; }
-.updated { font-size: 0.8rem; color: var(--muted); }
-h1 { font: 700 clamp(2.4rem, 9vw, 3.5rem)/1.05 var(--display); letter-spacing: -0.035em; margin: 6px 0 6px; }
-.sub { margin: 0; font-size: 1.15rem; color: var(--muted); font-weight: 500; }
-.trip { margin: 10px auto 0; display: inline-block; font-size: 0.82rem; color: var(--muted); background: var(--surface); border-radius: 999px; padding: 5px 14px; }
+/* Cabecera: antetítulo pequeño, titular grande, subtítulo en gris, fecha al pie */
+.top { text-align: center; padding: max(88px, calc(env(safe-area-inset-top) + 64px)) 0 48px; }
+.eyebrow { font: 600 0.95rem var(--display); color: var(--accent); letter-spacing: -0.005em; margin: 0 0 12px; }
+h1 { font: 700 clamp(3.2rem, 13vw, 5.6rem)/1 var(--display); letter-spacing: -0.045em; margin: 0; }
+.sub { margin: 20px auto 0; max-width: 30ch; font: 500 clamp(1.2rem, 4.6vw, 1.55rem)/1.3 var(--display); letter-spacing: -0.02em; color: var(--muted); text-wrap: balance; }
+.updated { margin: 28px 0 0; font-size: 0.82rem; color: var(--muted); }
 
-h2 { font: 600 1.35rem/1.2 var(--display); letter-spacing: -0.02em; margin: 22px 4px 2px; }
-.card { background: var(--surface); border-radius: 20px; padding: 22px; }
-.label { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
+h2 { font: 700 clamp(1.7rem, 6vw, 2.2rem)/1.1 var(--display); letter-spacing: -0.035em; margin: 56px 4px 4px; }
+.card { background: var(--surface); border-radius: 24px; padding: 30px 28px; }
+.label { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
 
-.chollo { background: var(--ink); color: #fff; border-radius: 20px; padding: 16px 22px; font-weight: 600; text-align: center; }
+.chollo { background: var(--accent); color: #fff; border-radius: 24px; padding: 18px 24px; font-weight: 600; text-align: center; }
 
-.hero { text-align: center; padding: 30px 22px 26px; }
-.big { font: 700 clamp(3rem, 14vw, 4.6rem)/1 var(--display); letter-spacing: -0.045em; margin: 8px 0 14px; font-variant-numeric: tabular-nums; }
-.big small { display: block; font: 500 0.95rem var(--font); letter-spacing: 0; color: var(--muted); margin-top: 6px; }
-.pill { display: inline-block; border-radius: 999px; padding: 6px 14px; font-size: 0.88rem; font-weight: 600; }
+.hero { text-align: center; padding: 44px 28px 40px; }
+.big { font: 700 clamp(3.4rem, 15vw, 5rem)/1 var(--display); letter-spacing: -0.05em; margin: 14px 0 18px; font-variant-numeric: tabular-nums; }
+.big.none { color: var(--muted); font-weight: 300; }
+.big small { display: block; font: 500 1rem var(--font); letter-spacing: -0.01em; color: var(--muted); margin-top: 10px; }
+.pill { display: inline-block; border-radius: 999px; padding: 7px 16px; font-size: 0.88rem; font-weight: 600; }
 .pill.good { background: var(--good-soft); color: var(--good); }
 .pill.warn { background: var(--warn-soft); color: var(--warn); }
 .pill.bad { background: var(--bad-soft); color: var(--bad); }
-.pill.none { background: var(--bg); color: var(--muted); }
-.meter { height: 6px; border-radius: 3px; background: var(--line); margin: 22px auto 6px; max-width: 420px; overflow: hidden; }
+.pill.none { background: var(--surface-2); color: var(--muted); }
+.meter { height: 6px; border-radius: 3px; background: var(--surface-2); margin: 32px auto 8px; max-width: 420px; overflow: hidden; }
 .meter span { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 3px; }
 .meter-legend { display: flex; justify-content: space-between; max-width: 420px; margin: 0 auto; font-size: 0.75rem; color: var(--muted); }
-.change { margin: 16px auto 0; max-width: 460px; font-size: 0.92rem; color: var(--muted); }
+.change { margin: 24px auto 0; max-width: 40ch; font-size: 0.95rem; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
 
-.verdict { display: flex; gap: 16px; align-items: center; }
-.answer { flex: none; font: 700 1.05rem var(--display); background: var(--accent-soft); color: var(--accent); border-radius: 14px; padding: 12px 16px; }
-.why { margin: 0; font-size: 0.95rem; }
+.verdict { display: flex; gap: 20px; align-items: center; }
+.answer { flex: none; font: 700 1.05rem var(--display); background: var(--accent-soft); color: var(--accent); border-radius: 14px; padding: 12px 18px; }
+.why { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--ink); text-wrap: pretty; }
 
-.picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
-.pick { display: flex; flex-direction: column; gap: 4px; }
-.pick .icon { font-size: 1.6rem; }
-.pick .kind { font-size: 0.82rem; color: var(--muted); font-weight: 500; }
-.pick .price { font: 700 1.8rem/1.15 var(--display); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
-.pick .price.none { color: var(--muted); }
-.pick .what { font-size: 0.88rem; color: var(--muted); flex: 1; }
-.pick a { font-size: 0.92rem; font-weight: 500; margin-top: 8px; }
+.picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.pick { display: flex; flex-direction: column; gap: 6px; }
+.pick .icon { font-size: 1.7rem; margin-bottom: 10px; }
+.pick .kind { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+.pick .price { font: 700 2.2rem/1.1 var(--display); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.pick .price.none { color: var(--muted); font-weight: 300; }
+.pick .what { font-size: 0.92rem; line-height: 1.5; color: var(--muted); flex: 1; margin-top: 4px; text-wrap: pretty; }
+.pick a { font-size: 0.95rem; font-weight: 500; margin-top: 16px; }
 .pick a::after { content: " ›"; }
 
 .chart { position: relative; }
-.chart .hint { margin: 2px 0 12px; font-size: 0.85rem; color: var(--muted); }
+.chart .hint { margin: 4px 0 20px; font-size: 0.92rem; color: var(--muted); }
 .chart svg { width: 100%; height: auto; display: block; overflow: visible; touch-action: pan-y; }
 .chart .empty { color: var(--muted); font-size: 0.95rem; margin: 8px 0; }
-.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 10px; padding: 0; list-style: none; font-size: 0.85rem; color: var(--muted); }
-.legend li { display: flex; align-items: center; gap: 6px; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 18px; padding: 0; list-style: none; font-size: 0.85rem; color: var(--muted); }
+.legend li { display: flex; align-items: center; gap: 7px; }
 .legend i { width: 14px; height: 3px; border-radius: 2px; display: inline-block; }
 .legend i.dash { background: repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 7px) !important; }
-.tip { position: absolute; pointer-events: none; background: rgba(29,29,31,0.92); color: #fff; border-radius: 12px; padding: 9px 12px; font-size: 0.8rem; line-height: 1.45; white-space: nowrap; transform: translate(-50%, -100%); opacity: 0; transition: opacity 0.12s; z-index: 2; }
+.tip { position: absolute; pointer-events: none; background: rgba(58,58,60,0.96); color: var(--ink); border-radius: 12px; padding: 10px 13px; font-size: 0.8rem; line-height: 1.5; white-space: nowrap; transform: translate(-50%, -100%); opacity: 0; transition: opacity 0.12s; z-index: 2; box-shadow: 0 8px 24px rgba(0,0,0,0.5); }
 .tip b { font-weight: 600; }
 .tip .row { display: flex; align-items: center; gap: 6px; }
 .tip .row i { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-.tip .row span:last-child { margin-left: auto; padding-left: 12px; font-variant-numeric: tabular-nums; }
+.tip .row span:last-child { margin-left: auto; padding-left: 14px; font-variant-numeric: tabular-nums; }
 
+details.card { padding: 22px 28px; }
 details.card summary { cursor: pointer; font-weight: 600; list-style: none; display: flex; justify-content: space-between; }
 details.card summary::-webkit-details-marker { display: none; }
 details.card summary::after { content: "›"; color: var(--muted); transform: rotate(90deg); transition: transform 0.2s; }
 details[open].card summary::after { transform: rotate(-90deg); }
-.more { list-style: none; margin: 14px 0 0; padding: 0; }
-.more li { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid var(--line); font-size: 0.95rem; }
+.more { list-style: none; margin: 16px 0 0; padding: 0; }
+.more li { display: flex; justify-content: space-between; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); font-size: 0.95rem; }
 .more .p { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.tabla { width: 100%; border-collapse: collapse; margin-top: 14px; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
-.tabla th, .tabla td { padding: 8px 4px; border-top: 1px solid var(--line); text-align: right; }
+.tabla { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.tabla th, .tabla td { padding: 10px 4px; border-top: 1px solid var(--line); text-align: right; }
 .tabla th:first-child, .tabla td:first-child { text-align: left; }
 .tabla th { color: var(--muted); font-weight: 500; }
 
-.fine { color: var(--muted); font-size: 0.78rem; text-align: center; margin-top: 10px; }
+.fine { color: var(--muted); font-size: 0.78rem; line-height: 1.6; text-align: center; margin: 40px auto 0; max-width: 52ch; }
 @media (prefers-reduced-motion: no-preference) { .meter span { transition: width 0.6s ease; } }
-@media (max-width: 420px) { .verdict { flex-direction: column; align-items: flex-start; } }
+@media (max-width: 440px) {
+  .card { padding: 26px 22px; }
+  .verdict { flex-direction: column; align-items: flex-start; gap: 14px; }
+  h2 { margin-top: 48px; }
+}
 </style>
 
 <!-- DATOS: lo único que cambia cada día. El resto de la página no se toca. -->
@@ -158,10 +167,10 @@ details[open].card summary::after { transform: rotate(-90deg); }
 
 <main>
   <header class="top">
-    <div class="updated" id="updated"></div>
-    <h1>Rial Porrins</h1>
-    <p class="sub">Punta Cana · agosto 2027</p>
-    <span class="trip">10 personas · 10 días · todo incluido · vuelo directo desde Barcelona</span>
+    <p class="eyebrow">Punta Cana · Agosto 2027</p>
+    <h1>Rial Porrins.</h1>
+    <p class="sub">Diez personas. Diez días. Todo incluido y vuelo directo desde Barcelona.</p>
+    <p class="updated" id="updated"></p>
   </header>
 
   <div class="chollo" id="chollo" hidden></div>
@@ -226,6 +235,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
   // Hero
   var T = D.total_por_persona, s = $("semaforo");
   $("total").innerHTML = (T == null ? "—" : eur(T)) + "<small>por persona</small>";
+  if (T == null) $("total").classList.add("none");
   if (T == null) { s.className = "pill none"; s.textContent = "Aún sin precio completo"; }
   else if (T <= D.presupuesto) { s.className = "pill good"; s.textContent = "🟢 Dentro del presupuesto"; }
   else if (T <= D.presupuesto + 200) { s.className = "pill warn"; s.textContent = "🟡 Un poco por encima"; }
@@ -288,7 +298,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
       g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + yy + '" y2="' + yy + '" stroke="var(--line)" stroke-width="1"/>' +
         '<text x="' + (L - 8) + '" y="' + (+yy + 4) + '" text-anchor="end" font-size="11" fill="var(--muted)">' + eur(Math.round(v)) + '</text>';
     }
-    if (tope) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(tope) + '" y2="' + y(tope) + '" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="5 5" opacity="0.55"/>' +
+    if (tope) g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(tope) + '" y2="' + y(tope) + '" stroke="var(--muted)" stroke-width="1.5" stroke-dasharray="5 5"/>' +
       '<text x="' + (L + 4) + '" y="' + (y(tope) - 6) + '" font-size="11" fill="var(--muted)">Tope ' + eur(tope) + '</text>';
     g += '<text x="' + x(0) + '" y="' + (H - 6) + '" text-anchor="' + (n === 1 ? "middle" : "start") + '" font-size="11" fill="var(--muted)">' + fecha(h[0].fecha) + '</text>';
     if (n > 1) g += '<text x="' + x(n - 1) + '" y="' + (H - 6) + '" text-anchor="end" font-size="11" fill="var(--muted)">' + fecha(h[n - 1].fecha) + '</text>';
