@@ -105,7 +105,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
 .gauge-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
 .gauge-head strong { font: 700 1.35rem/1.2 var(--display); letter-spacing: -0.025em; }
 .gauge-head strong.low { color: var(--good); } .gauge-head strong.typical { color: var(--ink); } .gauge-head strong.high { color: var(--bad); }
-.gauge { position: relative; height: 8px; border-radius: 4px; margin: 26px 0 10px; background: linear-gradient(90deg, var(--good) 0 33%, var(--surface-2) 33% 67%, var(--bad) 67%); opacity: 0.9; }
+.gauge { position: relative; height: 8px; border-radius: 4px; margin: 26px 0 10px; background: linear-gradient(90deg, var(--good) 0 25%, var(--surface-2) 25% 75%, var(--bad) 75%); opacity: 0.9; }
 .gauge b { position: absolute; top: 50%; width: 18px; height: 18px; border-radius: 50%; background: var(--ink); border: 3px solid var(--surface); transform: translate(-50%, -50%); }
 .gauge-legend { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); }
 .gauge-note { margin: 16px 0 0; font-size: 0.92rem; color: var(--muted); line-height: 1.55; }
@@ -298,7 +298,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
     <span class="label">Por persona, con todo lo que se gasta allí</span>
     <p class="hint" style="margin:4px 0 6px;font-size:0.92rem;color:var(--muted)">Cambia las cifras a tu gusto. Se guardan solo en tu móvil.</p>
     <ul class="calc" id="calc"></ul>
-    <div class="calc-total"><span class="label">Total del viaje</span><strong id="calctotal"></strong></div>
+    <div class="calc-total"><span class="label" id="calclabel">Total del viaje</span><strong id="calctotal"></strong></div>
   </section>
 
   <h2>Antes de ir</h2>
@@ -429,7 +429,8 @@ details[open].card summary::after { transform: rotate(-90deg); }
     var extra = 0;
     EXTRAS.forEach(function (e) { var v = parseInt($("x-" + e[0]).value, 10) || 0; mis[e[0]] = v; extra += v; });
     store.set("rp-extras", mis);
-    $("calctotal").textContent = base == null ? "— + " + eur(extra) : eur(base + extra);
+    $("calctotal").textContent = eur(base == null ? extra : base + extra);
+    $("calclabel").textContent = base == null ? "Extras (falta sumar vuelo y hotel)" : "Total del viaje";
   }
   calc.addEventListener("input", sumar);
   sumar();
