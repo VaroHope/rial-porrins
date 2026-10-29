@@ -119,26 +119,6 @@ details[open].card summary::after { transform: rotate(-90deg); }
 .fecha .precios span { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
 .fecha a { grid-row: 1 / span 2; grid-column: 2; font-size: 0.95rem; font-weight: 500; }
 
-/* Presupuesto */
-.calc { list-style: none; margin: 8px 0 0; padding: 0; }
-.calc li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); font-size: 0.98rem; }
-.calc li:first-child { border-top: 0; }
-.calc input { width: 92px; text-align: right; font: 600 1rem var(--font); color: var(--ink); background: var(--surface-2); border: 0; border-radius: 10px; padding: 8px 10px; font-variant-numeric: tabular-nums; }
-.calc input:focus { outline: 2px solid var(--accent); }
-.calc .fijo { font-weight: 600; font-variant-numeric: tabular-nums; padding-right: 10px; }
-.calc-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 10px; padding-top: 18px; border-top: 1px solid var(--line); }
-.calc-total strong { font: 700 2rem/1 var(--display); letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
-
-/* Checklist */
-.check { list-style: none; margin: 8px 0 0; padding: 0; }
-.check label { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-top: 1px solid var(--line); cursor: pointer; font-size: 0.98rem; line-height: 1.45; }
-.check li:first-child label { border-top: 0; }
-.check input { appearance: none; -webkit-appearance: none; flex: none; width: 24px; height: 24px; border-radius: 50%; border: 2px solid var(--muted); margin: 0; display: grid; place-items: center; cursor: pointer; }
-.check input:checked { background: var(--accent); border-color: var(--accent); }
-.check input:checked::after { content: ""; width: 6px; height: 11px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: translateY(-1px) rotate(45deg); }
-.check input:checked + span { color: var(--muted); text-decoration: line-through; }
-.check small { display: block; color: var(--muted); font-size: 0.85rem; margin-top: 2px; text-decoration: none; }
-.progreso { font-size: 0.85rem; color: var(--muted); }
 .countdown { margin: 28px 0 0; font: 600 1rem var(--display); color: var(--ink); }
 .countdown + .updated { margin-top: 6px; }
 
@@ -293,20 +273,6 @@ details[open].card summary::after { transform: rotate(-90deg); }
     <div class="tip" id="tip2"></div>
   </section>
 
-  <h2>Presupuesto de verdad</h2>
-  <section class="card">
-    <span class="label">Por persona, con todo lo que se gasta allí</span>
-    <p class="hint" style="margin:4px 0 6px;font-size:0.92rem;color:var(--muted)">Cambia las cifras a tu gusto. Se guardan solo en tu móvil.</p>
-    <ul class="calc" id="calc"></ul>
-    <div class="calc-total"><span class="label" id="calclabel">Total del viaje</span><strong id="calctotal"></strong></div>
-  </section>
-
-  <h2>Antes de ir</h2>
-  <section class="card">
-    <span class="progreso" id="progreso"></span>
-    <ul class="check" id="check"></ul>
-  </section>
-
   <details class="card">
     <summary>Ver todos los datos</summary>
     <table class="tabla" id="tabla"></table>
@@ -409,52 +375,6 @@ details[open].card summary::after { transform: rotate(-90deg); }
     $("fechas").appendChild(el);
   });
 
-  // Presupuesto de verdad (cifras editables, guardadas en este móvil)
-  var store = { get: function (k) { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } },
-                set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
-  var EXTRAS = [["traslados", "Traslados aeropuerto ↔ hotel", 30], ["saona", "Excursión Isla Saona", 90], ["fiesta", "Coco Bongo y fiestas", 120],
-    ["seguro", "Seguro de viaje", 40], ["propinas", "Propinas", 40], ["bolsillo", "Dinero de bolsillo", 200]];
-  var mis = store.get("rp-extras") || {};
-  var base = D.total_por_persona;
-  var calc = $("calc");
-  calc.innerHTML = '<li><span>Vuelo directo + hotel (de hoy)</span><span class="fijo">' + eur(base) + '</span></li>';
-  EXTRAS.forEach(function (e) {
-    var li = document.createElement("li");
-    li.innerHTML = '<label for="x-' + e[0] + '"></label><input id="x-' + e[0] + '" type="number" inputmode="numeric" min="0" step="10">';
-    li.querySelector("label").textContent = e[1];
-    li.querySelector("input").value = mis[e[0]] != null ? mis[e[0]] : e[2];
-    calc.appendChild(li);
-  });
-  function sumar() {
-    var extra = 0;
-    EXTRAS.forEach(function (e) { var v = parseInt($("x-" + e[0]).value, 10) || 0; mis[e[0]] = v; extra += v; });
-    store.set("rp-extras", mis);
-    $("calctotal").textContent = eur(base == null ? extra : base + extra);
-    $("calclabel").textContent = base == null ? "Extras (falta sumar vuelo y hotel)" : "Total del viaje";
-  }
-  calc.addEventListener("input", sumar);
-  sumar();
-
-  // Antes de ir (lista marcable, guardada en este móvil)
-  var CHECK = [["pasaporte", "Pasaporte en vigor", "Con el DNI no se puede entrar."],
-    ["eticket", "Rellenar el e-Ticket de entrada", "Gratis, en eticket.migracion.gob.do, los días antes de volar."],
-    ["seguro", "Seguro de viaje con médico", "Agosto es temporada de huracanes: que cubra cancelaciones."],
-    ["reserva", "Reservar todos el mismo vuelo y hotel", "Mejor una sola reserva de grupo."],
-    ["tarjeta", "Tarjeta sin comisiones y algo de dólares", "Para propinas y excursiones."],
-    ["enchufe", "Adaptador de enchufe americano", "Allí son tipo A/B a 110 V."],
-    ["sol", "Protector solar y antimosquitos", "Allí es caro."]];
-  var hecho = store.get("rp-check") || {};
-  CHECK.forEach(function (c) {
-    var li = document.createElement("li");
-    li.innerHTML = '<label><input type="checkbox"><span><b></b><small></small></span></label>';
-    li.querySelector("b").textContent = c[1]; li.querySelector("b").style.fontWeight = "500";
-    li.querySelector("small").textContent = c[2];
-    var cb = li.querySelector("input"); cb.checked = !!hecho[c[0]];
-    cb.addEventListener("change", function () { hecho[c[0]] = cb.checked; store.set("rp-check", hecho); progreso(); });
-    $("check").appendChild(li);
-  });
-  function progreso() { var n = CHECK.filter(function (c) { return hecho[c[0]]; }).length; $("progreso").textContent = n + " de " + CHECK.length + " hechos"; }
-  progreso();
 
   // Gráficas: líneas por serie, eje único en €, tooltip al pasar/tocar
   var SERIES = [
