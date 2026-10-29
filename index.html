@@ -1,0 +1,234 @@
+<title>Rial Porrins Punta Cana</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: one narrow phone-first column — price verdict first, then the three picks, then history. */
+:root {
+  --bg: #edf4e8;
+  --surface: #ffffff;
+  --ink: #142a19;
+  --muted: #587060;
+  --line: #d2e3cb;
+  --lagoon: #2f7d32;
+  --lagoon-soft: #d9eed2;
+  --mango: #e3b11c;
+  --good: #1f8a4c;
+  --good-soft: #dcf2e4;
+  --warn: #b7791f;
+  --warn-soft: #fbeed3;
+  --bad: #c2412d;
+  --bad-soft: #fbe2dc;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --body: "DM Sans", "Helvetica Neue", Arial, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b170e; --surface: #132519; --ink: #e5f2e1; --muted: #95ad97; --line: #23412b;
+    --lagoon: #7fd86f; --lagoon-soft: #1a3a21; --mango: #f2cb4b;
+    --good: #5fd18f; --good-soft: #15382a; --warn: #f0bd5c; --warn-soft: #3a2f16; --bad: #f08470; --bad-soft: #3d1f1a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0b170e; --surface: #132519; --ink: #e5f2e1; --muted: #95ad97; --line: #23412b;
+  --lagoon: #7fd86f; --lagoon-soft: #1a3a21; --mango: #f2cb4b;
+  --good: #5fd18f; --good-soft: #15382a; --warn: #f0bd5c; --warn-soft: #3a2f16; --bad: #f08470; --bad-soft: #3d1f1a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px 40px;
+}
+main { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+h1, h2, .big { font-family: var(--display); text-wrap: balance; margin: 0; }
+h1 { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; color: var(--lagoon); }
+.sub { font-family: var(--display); font-weight: 600; font-size: 1.25rem; }
+h2 { font-size: 1.15rem; font-weight: 700; }
+p { margin: 0; }
+.top { display: flex; flex-direction: column; gap: 6px; padding-bottom: 4px; }
+.trip { color: var(--muted); font-size: 0.95rem; }
+.updated { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+
+.chollo { background: var(--mango); color: #2b1a00; border-radius: 14px; padding: 14px 16px; font-weight: 700; font-size: 1.05rem; }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.hero .label { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; }
+.big { font-size: 3.4rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; }
+.big small { font-size: 1rem; font-weight: 600; letter-spacing: 0; color: var(--muted); font-family: var(--body); }
+.pill { align-self: flex-start; border-radius: 999px; padding: 5px 12px; font-weight: 700; font-size: 0.9rem; }
+.pill.good { background: var(--good-soft); color: var(--good); }
+.pill.warn { background: var(--warn-soft); color: var(--warn); }
+.pill.bad { background: var(--bad-soft); color: var(--bad); }
+.meter { position: relative; height: 12px; border-radius: 999px; background: var(--lagoon-soft); overflow: hidden; }
+.meter span { position: absolute; inset: 0 auto 0 0; border-radius: 999px; background: var(--lagoon); }
+.meter-legend { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.change { font-size: 0.95rem; color: var(--muted); }
+
+.verdict { flex-direction: row; align-items: center; gap: 14px; }
+.verdict .answer { font-family: var(--display); font-weight: 800; font-size: 1.5rem; white-space: nowrap; }
+.verdict .why { color: var(--muted); font-size: 0.95rem; }
+
+.picks { display: grid; gap: 10px; }
+.pick { display: grid; grid-template-columns: auto 1fr auto; gap: 4px 12px; align-items: center; }
+.pick .icon { font-size: 1.8rem; grid-row: span 2; }
+.pick .kind { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 700; }
+.pick .what { font-weight: 500; min-width: 0; }
+.pick .price { font-family: var(--display); font-weight: 800; font-size: 1.4rem; font-variant-numeric: tabular-nums; grid-row: span 2; text-align: right; }
+.pick a { grid-column: 1 / -1; display: block; text-align: center; background: var(--lagoon); color: var(--surface); text-decoration: none; font-weight: 700; padding: 11px; border-radius: 12px; margin-top: 6px; }
+.pick a:focus-visible, summary:focus-visible { outline: 3px solid var(--mango); outline-offset: 2px; }
+
+.chart svg { width: 100%; height: auto; display: block; }
+.chart .empty { color: var(--muted); font-size: 0.95rem; }
+
+details summary { cursor: pointer; font-weight: 700; font-family: var(--display); font-size: 1.1rem; }
+.more { list-style: none; padding: 0; margin: 8px 0 0; display: flex; flex-direction: column; gap: 10px; }
+.more li { display: flex; justify-content: space-between; gap: 12px; border-top: 1px solid var(--line); padding-top: 10px; }
+.more li > span { min-width: 0; }
+.more a { color: var(--lagoon); font-weight: 700; }
+.more .p { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+.fine { color: var(--muted); font-size: 0.82rem; text-align: center; }
+@media (prefers-reduced-motion: no-preference) { .meter span { transition: width 0.6s ease; } }
+</style>
+
+<!-- DATOS: lo único que cambia cada día. El resto de la página no se toca. -->
+<script id="datos" type="application/json">
+{
+  "actualizado": "2026-10-29",
+  "presupuesto": 1500,
+  "total_por_persona": 1100,
+  "total_nota": "Vuelo + hotel todo incluido, 10 días (estimación con paquetes de agosto 2026; aún no hay precios de agosto 2027)",
+  "chollo": "",
+  "reservar": "Todavía no",
+  "reservar_por_que": "Las ofertas de agosto 2027 salen entre enero y marzo. Os avisamos aquí cuando toque.",
+  "vuelo": { "precio": 686, "texto": "Vuelo directo i/v más barato hoy (Iberojet, fechas de 2026; agosto 2027 aún no se vende)", "enlace": "https://www.kayak.es/vuelos/Barcelona-El-Prat-BCN/Aeropuerto-Internacional-de-Punta-Cana-PUJ" },
+  "paquete": { "precio": 889, "texto": "Vuelo directo + hotel 4* todo incluido, 8 noches", "enlace": "https://www.chollometro.com/ofertas/punta-cana-8-noches-hotel-4-con-todo-incluidovuelos-directos-maleta-facturadatraslados-tasas-seguro-ago-sep-1947703" },
+  "hotel": { "precio": null, "texto": "Riu Republica: solo adultos, fiestas cada día", "enlace": "https://www.sunwing.ca/en/best-vacations/best-riu-party-resorts/from-montreal" },
+  "mas_opciones": [
+    { "nombre": "Atrápalo · 7 noches 4-5* todo incluido + vuelo", "precio": 790, "enlace": "https://www.compradiccion.com/viajes/disfruta-del-sol-en-punta-cana-durante-siete-noches-y-de-un-hotel-de-cinco-estrellas-por-790-euros-gracias-a-atrapalo/amp" },
+    { "nombre": "Destinia · 7 noches todo incluido + vuelo (julio-agosto)", "precio": 829, "enlace": "https://www.compradiccion.com/viajes/viaje-a-punta-cana-de-9-dias-7-noches-por-solo-739-euros-por-persona-con-destinia" },
+    { "nombre": "Air France · vuelo vía París", "precio": 824, "enlace": "https://wwws.airfrance.es/es-es/vuelos-desde-barcelona-a-punta-cana" },
+    { "nombre": "Logitravel · vuelos BCN → Punta Cana", "precio": 850, "enlace": "https://www.logitravel.com/vuelos/america/republica-dominicana/punta-cana/barcelona-punta-cana-652/" }
+  ],
+  "historico": [
+    { "fecha": "2026-10-29", "total": 1100 }
+  ]
+}
+</script>
+
+<main>
+  <header class="top">
+    <span class="updated" id="updated"></span>
+    <h1>Rial Porrins <span class="leaf" aria-hidden="true">🌿</span></h1>
+    <p class="sub">Punta Cana · agosto 2027</p>
+    <p class="trip">10 porrins · 10 días · todo incluido · Barcelona ✈ Punta Cana</p>
+  </header>
+
+  <div class="chollo" id="chollo" hidden></div>
+
+  <section class="card hero">
+    <span class="label">Hoy nos cuesta</span>
+    <p class="big" id="total"></p>
+    <span class="pill" id="semaforo"></span>
+    <div class="meter" aria-hidden="true"><span id="meter"></span></div>
+    <div class="meter-legend"><span>0 €</span><span id="budget"></span></div>
+    <p class="change" id="change"></p>
+  </section>
+
+  <section class="card verdict">
+    <span class="answer" id="reservar"></span>
+    <p class="why" id="why"></p>
+  </section>
+
+  <h2>Lo mejor de hoy</h2>
+  <div class="picks" id="picks"></div>
+
+  <section class="card chart">
+    <h2>Cómo va el precio</h2>
+    <div id="chart"></div>
+  </section>
+
+  <details class="card">
+    <summary>Más opciones</summary>
+    <ul class="more" id="more"></ul>
+  </details>
+
+  <p class="fine">Precios orientativos por persona, sacados de webs de viajes. Confirmad siempre en el enlace antes de pagar. Esta página se actualiza sola cada mañana.</p>
+</main>
+
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById("datos").textContent);
+  var eur = function (n) { return n == null ? "—" : n.toLocaleString("es-ES") + " €"; };
+  var fecha = function (s) { return new Date(s + "T12:00:00").toLocaleDateString("es-ES", { day: "numeric", month: "long" }); };
+  var $ = function (id) { return document.getElementById(id); };
+
+  $("updated").textContent = "Actualizado el " + fecha(D.actualizado);
+  if (D.chollo) { $("chollo").hidden = false; $("chollo").textContent = "🔥 CHOLLO · " + D.chollo; }
+
+  $("total").innerHTML = "~" + eur(D.total_por_persona) + " <small>por persona</small>";
+  var s = $("semaforo");
+  if (D.total_por_persona <= D.presupuesto) { s.className = "pill good"; s.textContent = "🟢 Dentro del presupuesto"; }
+  else if (D.total_por_persona <= D.presupuesto + 200) { s.className = "pill warn"; s.textContent = "🟡 Un poco por encima"; }
+  else { s.className = "pill bad"; s.textContent = "🔴 Demasiado caro"; }
+  $("meter").style.width = Math.min(100, D.total_por_persona / D.presupuesto * 100) + "%";
+  $("budget").textContent = "Tope " + eur(D.presupuesto);
+
+  var h = D.historico;
+  if (h.length > 1) {
+    var diff = h[h.length - 1].total - h[h.length - 2].total;
+    $("change").textContent = diff === 0 ? "Igual que ayer." : (diff < 0 ? "⬇️ " + eur(-diff) + " más barato que ayer" : "⬆️ " + eur(diff) + " más caro que ayer");
+  } else { $("change").textContent = D.total_nota; }
+
+  $("reservar").textContent = D.reservar;
+  $("why").textContent = D.reservar_por_que;
+
+  [["✈️", "Vuelo", D.vuelo, "Ver vuelos"], ["🏨", "Paquete", D.paquete, "Ver oferta"], ["🎉", "Hotel de fiesta", D.hotel, "Ver hotel"]].forEach(function (p) {
+    var el = document.createElement("article");
+    el.className = "card pick";
+    el.innerHTML = '<span class="icon"></span><span class="kind"></span><span class="price"></span><span class="what"></span><a target="_blank" rel="noopener"></a>';
+    el.querySelector(".icon").textContent = p[0];
+    el.querySelector(".kind").textContent = p[1];
+    el.querySelector(".price").textContent = p[2].precio == null ? "pronto" : eur(p[2].precio);
+    el.querySelector(".what").textContent = p[2].texto;
+    var a = el.querySelector("a"); a.href = p[2].enlace; a.textContent = p[3];
+    $("picks").appendChild(el);
+  });
+
+  D.mas_opciones.forEach(function (o) {
+    var li = document.createElement("li");
+    li.innerHTML = '<span><a target="_blank" rel="noopener"></a></span><span class="p"></span>';
+    var a = li.querySelector("a"); a.href = o.enlace; a.textContent = o.nombre;
+    li.querySelector(".p").textContent = eur(o.precio);
+    $("more").appendChild(li);
+  });
+
+  if (h.length < 2) {
+    $("chart").innerHTML = '<p class="empty">Hoy es el primer día. La gráfica aparece en cuanto haya más precios.</p>';
+  } else {
+    var W = 520, H = 200, L = 52, R = 14, T = 16, B = 30;
+    var vals = h.map(function (x) { return x.total; }).concat([D.presupuesto]);
+    var lo = Math.floor(Math.min.apply(null, vals) * 0.9 / 100) * 100, hi = Math.ceil(Math.max.apply(null, vals) * 1.05 / 100) * 100;
+    var x = function (i) { return L + i * (W - L - R) / (h.length - 1); };
+    var y = function (v) { return T + (hi - v) * (H - T - B) / (hi - lo); };
+    var pts = h.map(function (p, i) { return x(i).toFixed(1) + "," + y(p.total).toFixed(1); }).join(" ");
+    var last = h[h.length - 1];
+    $("chart").innerHTML =
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Evolución del precio por persona">' +
+      '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(D.presupuesto) + '" y2="' + y(D.presupuesto) + '" stroke="var(--mango)" stroke-width="2" stroke-dasharray="6 5"/>' +
+      '<text x="' + (W - R) + '" y="' + (y(D.presupuesto) - 6) + '" text-anchor="end" font-size="12" fill="var(--muted)">Tope ' + eur(D.presupuesto) + '</text>' +
+      '<text x="' + (L - 8) + '" y="' + (y(hi) + 4) + '" text-anchor="end" font-size="12" fill="var(--muted)">' + eur(hi) + '</text>' +
+      '<text x="' + (L - 8) + '" y="' + (y(lo) + 4) + '" text-anchor="end" font-size="12" fill="var(--muted)">' + eur(lo) + '</text>' +
+      '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(lo) + '" y2="' + y(lo) + '" stroke="var(--line)"/>' +
+      '<polyline points="' + pts + '" fill="none" stroke="var(--lagoon)" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<circle cx="' + x(h.length - 1) + '" cy="' + y(last.total) + '" r="5" fill="var(--lagoon)"/>' +
+      '<text x="' + L + '" y="' + (H - 8) + '" font-size="12" fill="var(--muted)">' + fecha(h[0].fecha) + '</text>' +
+      '<text x="' + (W - R) + '" y="' + (H - 8) + '" text-anchor="end" font-size="12" fill="var(--muted)">' + fecha(last.fecha) + '</text>' +
+      '</svg>';
+  }
+})();
+</script>
