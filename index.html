@@ -116,6 +116,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
 .fecha .best { display: inline-block; margin-left: 8px; font: 600 0.72rem var(--font); color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 3px 9px; vertical-align: middle; letter-spacing: 0; }
 .ruta { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
 .ruta .nombre { display: flex; align-items: center; gap: 8px; font-size: 0.92rem; font-weight: 500; }
+.ruta.alt .nombre, .ruta.alt .precios span { color: var(--muted); font-weight: 400; }
 .ruta .nombre i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
 .ruta .precios { grid-column: 1; font-size: 0.88rem; color: var(--muted); padding-left: 16px; }
 .ruta .precios span { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -145,8 +146,8 @@ details[open].card summary::after { transform: rotate(-90deg); }
   "reservar_por_que": "No hay vuelos directos ni paquetes de agosto 2027 a la venta; las ofertas de reserva anticipada suelen salir entre enero y marzo.",
   "vuelo": {
     "precio": null,
-    "texto": "Todavía no hay vuelos directos a la venta para agosto 2027. Con escala: ida y vuelta a Punta Cana desde 740 €; ida a Santo Domingo y vuelta desde Punta Cana desde 1.090 €.",
-    "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDUFVKGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQE&tfu=EgIIAQ"
+    "texto": "Todavía no hay vuelos directos a Santo Domingo con vuelta desde Punta Cana para agosto 2027. Con escala, desde 1090 €.",
+    "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhogEgoyMDI3LTA4LTE1KABqBwgBEgNCQ05yBwgBEgNTRFEaIBIKMjAyNy0wOC0yNSgAagcIARIDUFVKcgcIARIDQkNOQAFIAXABmAED&tfu=EgIIAQ"
   },
   "paquete": {
     "precio": null,
@@ -160,6 +161,11 @@ details[open].card summary::after { transform: rotate(-90deg); }
   },
   "mas_opciones": [
     {
+      "nombre": "British Airways + American · con escala (referencia), ida Santo Domingo / vuelta Punta Cana, 15→25 ago",
+      "precio": 1090,
+      "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDU0RRGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQM&tfu=EgIIAQ"
+    },
+    {
       "nombre": "Iberia + American · con escala (referencia), Punta Cana i/v, 15→25 ago",
       "precio": 1053,
       "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDUFVKGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQE&tfu=EgIIAQ"
@@ -168,11 +174,6 @@ details[open].card summary::after { transform: rotate(-90deg); }
       "nombre": "Air Europa · con escala (referencia), Punta Cana i/v, 15→25 ago",
       "precio": 1078,
       "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDUFVKGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQE&tfu=EgIIAQ"
-    },
-    {
-      "nombre": "British Airways + American · con escala (referencia), ida Santo Domingo / vuelta Punta Cana, 15→25 ago",
-      "precio": 1090,
-      "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDU0RRGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQM&tfu=EgIIAQ"
     }
   ],
   "historico": [
@@ -254,9 +255,9 @@ details[open].card summary::after { transform: rotate(-90deg); }
 
 <main>
   <header class="top">
-    <p class="eyebrow">Punta Cana · Agosto 2027</p>
+    <p class="eyebrow">Santo Domingo · Punta Cana · Agosto 2027</p>
     <h1>Rial Porrins.</h1>
-    <p class="sub">Diez personas. Diez días. Todo incluido y vuelo directo desde Barcelona.</p>
+    <p class="sub">Diez personas. Diez días. Llegamos a Santo Domingo y volvemos desde Punta Cana, en vuelo directo.</p>
     <p class="countdown" id="countdown"></p>
     <p class="updated" id="updated"></p>
   </header>
@@ -278,7 +279,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
   </section>
 
   <section class="card" id="googlecard" hidden>
-    <div class="gauge-head"><span class="label">¿Es buen precio el vuelo?</span><strong id="gnivel"></strong></div>
+    <div class="gauge-head"><span class="label">¿Es buen precio volar allí?</span><strong id="gnivel"></strong></div>
     <div class="gauge" aria-hidden="true"><b id="gpunto"></b></div>
     <div class="gauge-legend"><span>Barato</span><span id="grango"></span><span>Caro</span></div>
     <p class="gauge-note" id="gnota"></p>
@@ -350,7 +351,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
   $("why").textContent = D.reservar_por_que;
 
   // Tarjetas
-  [["✈️", "Vuelo directo", D.vuelo, "Ver vuelos"], ["🏝️", "Paquete con vuelo directo", D.paquete, "Ver ofertas"], ["🎉", "Hotel de fiesta", D.hotel, "Ver hotel"]].forEach(function (p) {
+  [["✈️", "Vuelo directo Santo Domingo + Punta Cana", D.vuelo, "Ver vuelos"], ["🏝️", "Paquete con vuelo directo", D.paquete, "Ver ofertas"], ["🎉", "Hotel de fiesta", D.hotel, "Ver hotel"]].forEach(function (p) {
     var el = document.createElement("article");
     el.className = "card pick";
     el.innerHTML = '<span class="icon"></span><span class="kind"></span><span class="price"></span><span class="what"></span><a target="_blank" rel="noopener"></a>';
@@ -387,11 +388,11 @@ details[open].card summary::after { transform: rotate(-90deg); }
     var pos = Math.max(0, Math.min(1, (G.precio - (a - w / 2)) / (w * 2)));
     $("gpunto").style.left = (pos * 100) + "%";
     $("grango").textContent = "Lo normal: " + eur(a) + " – " + eur(b);
-    $("gnota").textContent = "Vuelo " + G.tipo + " a " + eur(G.precio) + ", salida " + fecha(G.ida) + ". Google compara con lo que suele costar esta ruta en estas fechas." + (G.tipo === "con escala" ? " Cuando salgan los directos, se medirá con ellos." : "");
+    $("gnota").textContent = "Referencia: ida y vuelta a Punta Cana " + G.tipo + ", " + eur(G.precio) + ", salida " + fecha(G.ida) + ". Google solo valora vuelos de ida y vuelta, no el combinado con Santo Domingo, pero sirve para saber si los precios a la isla están altos o bajos.";
   }
 
   // Comparativa por fecha de salida y ruta
-  var RUTAS = [["puj", "Ida y vuelta a Punta Cana", "var(--s1)"], ["sdq", "Ida a Santo Domingo, vuelta desde Punta Cana", "var(--s4)"]];
+  var RUTAS = [["sdq", "Ida a Santo Domingo, vuelta desde Punta Cana", "var(--s1)", true], ["puj", "Alternativa: ida y vuelta a Punta Cana", "var(--s4)"]];
   var F = (D.fechas || []).filter(function (f) { return f.puj; });
   var mejor = null;
   F.forEach(function (f) { RUTAS.forEach(function (r) { var v = f[r[0]] && f[r[0]].directo; if (v != null && (!mejor || v < mejor.v)) mejor = { f: f, r: r[0], v: v }; }); });
@@ -409,6 +410,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
         (x.escala != null ? ' · Con escala <span class="e"></span>' : "") + '</span><a target="_blank" rel="noopener">Ver ›</a>';
       row.querySelector("i").style.background = r[2];
       row.querySelector(".nombre span").textContent = r[1];
+      if (!r[3]) row.classList.add("alt");
       if (mejor && mejor.f === f && mejor.r === r[0]) row.querySelector(".nombre").insertAdjacentHTML("beforeend", '<span class="best">Más barato</span>');
       row.querySelector(".d").textContent = eur(x.directo);
       if (x.escala != null) row.querySelector(".e").textContent = eur(x.escala);
@@ -420,12 +422,12 @@ details[open].card summary::after { transform: rotate(-90deg); }
 
   // Gráficas: líneas por serie, eje único en €, tooltip al pasar/tocar
   var SERIES = [
-    { k: "directo", n: "Directo Punta Cana", c: "var(--s1)" },
-    { k: "directo_sdq", n: "Directo Santo Domingo + Punta Cana", c: "var(--s4)" },
+    { k: "directo_sdq", n: "Directo Santo Domingo + Punta Cana", c: "var(--s1)" },
+    { k: "directo", n: "Directo ida y vuelta Punta Cana", c: "var(--s4)" },
     { k: "paquete", n: "Paquete directo", c: "var(--s2)" },
     { k: "hotel", n: "Hotel", c: "var(--s3)" },
-    { k: "escala", n: "Con escala Punta Cana", c: "var(--s1)", dash: true },
-    { k: "escala_sdq", n: "Con escala Santo Domingo + Punta Cana", c: "var(--s4)", dash: true }
+    { k: "escala_sdq", n: "Con escala Santo Domingo + Punta Cana", c: "var(--s1)", dash: true },
+    { k: "escala", n: "Con escala ida y vuelta Punta Cana", c: "var(--s4)", dash: true }
   ];
 
   function grafica(box, tipBox, series, tope) {
@@ -505,7 +507,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
   window.addEventListener("resize", function () { if (window.innerWidth !== ancho) { ancho = window.innerWidth; dibujar(); } });
 
   // Tabla con todos los datos (también para quien no vea bien los colores)
-  var cols = [["fecha", "Día"], ["total", "Total"], ["directo", "Dir. PUJ"], ["directo_sdq", "Dir. SDQ"], ["paquete", "Paquete"], ["hotel", "Hotel"], ["escala", "Esc. PUJ"], ["escala_sdq", "Esc. SDQ"]];
+  var cols = [["fecha", "Día"], ["total", "Total"], ["directo_sdq", "Dir. SDQ"], ["directo", "Dir. PUJ"], ["paquete", "Paquete"], ["hotel", "Hotel"], ["escala_sdq", "Esc. SDQ"], ["escala", "Esc. PUJ"]];
   var tb = "<tr>" + cols.map(function (c) { return "<th>" + c[1] + "</th>"; }).join("") + "</tr>";
   h.slice().reverse().forEach(function (p) {
     tb += "<tr>" + cols.map(function (c) { return "<td>" + (c[0] === "fecha" ? fecha(p.fecha) : eur(p[c[0]])) + "</td>"; }).join("") + "</tr>";
