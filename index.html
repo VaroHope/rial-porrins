@@ -96,7 +96,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
 .more { list-style: none; margin: 16px 0 0; padding: 0; }
 .more li { display: flex; justify-content: space-between; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); font-size: 0.95rem; }
 .more .p { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.tabla { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
+.tabla { width: 100%; display: block; overflow-x: auto; white-space: nowrap; border-collapse: collapse; margin-top: 16px; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
 .tabla th, .tabla td { padding: 10px 4px; border-top: 1px solid var(--line); text-align: right; }
 .tabla th:first-child, .tabla td:first-child { text-align: left; }
 .tabla th { color: var(--muted); font-weight: 500; }
@@ -112,12 +112,14 @@ details[open].card summary::after { transform: rotate(-90deg); }
 
 /* Fechas */
 .fechas { display: grid; gap: 12px; }
-.fecha { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; }
-.fecha .dia { font: 700 1.25rem/1.2 var(--display); letter-spacing: -0.025em; }
+.fecha .dia { display: block; font: 700 1.3rem/1.2 var(--display); letter-spacing: -0.025em; margin-bottom: 6px; }
 .fecha .best { display: inline-block; margin-left: 8px; font: 600 0.72rem var(--font); color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 3px 9px; vertical-align: middle; letter-spacing: 0; }
-.fecha .precios { grid-column: 1; font-size: 0.9rem; color: var(--muted); }
-.fecha .precios span { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
-.fecha a { grid-row: 1 / span 2; grid-column: 2; font-size: 0.95rem; font-weight: 500; }
+.ruta { display: grid; grid-template-columns: 1fr auto; gap: 2px 16px; align-items: center; padding: 12px 0; border-top: 1px solid var(--line); }
+.ruta .nombre { display: flex; align-items: center; gap: 8px; font-size: 0.92rem; font-weight: 500; }
+.ruta .nombre i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.ruta .precios { grid-column: 1; font-size: 0.88rem; color: var(--muted); padding-left: 16px; }
+.ruta .precios span { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+.ruta a { grid-row: 1 / span 2; grid-column: 2; font-size: 0.95rem; font-weight: 500; }
 
 .countdown { margin: 28px 0 0; font: 600 1rem var(--display); color: var(--ink); }
 .countdown + .updated { margin-top: 6px; }
@@ -194,29 +196,6 @@ details[open].card summary::after { transform: rotate(-90deg); }
       "escala": 740,
       "paquete": null,
       "hotel": null
-    }
-  ],
-  "fechas": [
-    {
-      "ida": "2027-08-15",
-      "vuelta": "2027-08-25",
-      "directo": null,
-      "escala": 740,
-      "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDUFVKGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQE&tfu=EgIIAQ"
-    },
-    {
-      "ida": "2027-08-18",
-      "vuelta": "2027-08-28",
-      "directo": null,
-      "escala": 766,
-      "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE4agcIARIDQkNOcgcIARIDUFVKGh4SCjIwMjctMDgtMjhqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQE&tfu=EgIIAQ"
-    },
-    {
-      "ida": "2027-08-21",
-      "vuelta": "2027-08-31",
-      "directo": null,
-      "escala": 993,
-      "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTIxagcIARIDQkNOcgcIARIDUFVKGh4SCjIwMjctMDgtMzFqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQE&tfu=EgIIAQ"
     }
   ],
   "google": {
@@ -370,31 +349,42 @@ details[open].card summary::after { transform: rotate(-90deg); }
     $("gnota").textContent = "Vuelo " + G.tipo + " a " + eur(G.precio) + ", salida " + fecha(G.ida) + ". Google compara con lo que suele costar esta ruta en estas fechas." + (G.tipo === "con escala" ? " Cuando salgan los directos, se medirá con ellos." : "");
   }
 
-  // Comparativa por fecha de salida
-  var F = D.fechas || [];
-  var precioF = function (f) { return f.directo != null ? f.directo : null; };
-  var conDir = F.filter(function (f) { return f.directo != null; });
-  var mejor = conDir.length ? conDir.reduce(function (m, f) { return f.directo < m.directo ? f : m; }) : null;
+  // Comparativa por fecha de salida y ruta
+  var RUTAS = [["puj", "Ida y vuelta a Punta Cana", "var(--s1)"], ["sdq", "Ida a Santo Domingo, vuelta desde Punta Cana", "var(--s4)"]];
+  var F = (D.fechas || []).filter(function (f) { return f.puj; });
+  var mejor = null;
+  F.forEach(function (f) { RUTAS.forEach(function (r) { var v = f[r[0]] && f[r[0]].directo; if (v != null && (!mejor || v < mejor.v)) mejor = { f: f, r: r[0], v: v }; }); });
   if (!F.length) $("fechas").innerHTML = '<p class="card empty" style="color:var(--muted)">Mañana aparece la comparativa por fechas.</p>';
   F.forEach(function (f) {
     var el = document.createElement("article");
     el.className = "card fecha";
-    el.innerHTML = '<span class="dia"></span><span class="precios">Directo <span class="d"></span> · Con escala <span class="e"></span></span><a target="_blank" rel="noopener">Ver ›</a>';
+    el.innerHTML = '<span class="dia"></span>';
     el.querySelector(".dia").textContent = fecha(f.ida) + " → " + fecha(f.vuelta);
-    if (f === mejor) el.querySelector(".dia").insertAdjacentHTML("beforeend", '<span class="best">Más barato</span>');
-    el.querySelector(".d").textContent = eur(f.directo);
-    el.querySelector(".e").textContent = eur(f.escala);
-    el.querySelector("a").href = f.enlace;
+    RUTAS.forEach(function (r) {
+      var x = f[r[0]] || {};
+      var row = document.createElement("div");
+      row.className = "ruta";
+      row.innerHTML = '<span class="nombre"><i></i><span></span></span><span class="precios">Directo <span class="d"></span>' +
+        (x.escala != null ? ' · Con escala <span class="e"></span>' : "") + '</span><a target="_blank" rel="noopener">Ver ›</a>';
+      row.querySelector("i").style.background = r[2];
+      row.querySelector(".nombre span").textContent = r[1];
+      if (mejor && mejor.f === f && mejor.r === r[0]) row.querySelector(".nombre").insertAdjacentHTML("beforeend", '<span class="best">Más barato</span>');
+      row.querySelector(".d").textContent = eur(x.directo);
+      if (x.escala != null) row.querySelector(".e").textContent = eur(x.escala);
+      row.querySelector("a").href = x.enlace || "#";
+      el.appendChild(row);
+    });
     $("fechas").appendChild(el);
   });
 
-
   // Gráficas: líneas por serie, eje único en €, tooltip al pasar/tocar
   var SERIES = [
-    { k: "directo", n: "Vuelo directo", c: "var(--s1)" },
+    { k: "directo", n: "Directo Punta Cana", c: "var(--s1)" },
+    { k: "directo_sdq", n: "Directo Santo Domingo + Punta Cana", c: "var(--s4)" },
     { k: "paquete", n: "Paquete directo", c: "var(--s2)" },
     { k: "hotel", n: "Hotel", c: "var(--s3)" },
-    { k: "escala", n: "Vuelo con escala (referencia)", c: "var(--s4)", dash: true }
+    { k: "escala", n: "Con escala Punta Cana", c: "var(--s1)", dash: true },
+    { k: "escala_sdq", n: "Con escala Santo Domingo + Punta Cana", c: "var(--s4)", dash: true }
   ];
 
   function grafica(box, tipBox, series, tope) {
@@ -474,7 +464,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
   window.addEventListener("resize", function () { if (window.innerWidth !== ancho) { ancho = window.innerWidth; dibujar(); } });
 
   // Tabla con todos los datos (también para quien no vea bien los colores)
-  var cols = [["fecha", "Día"], ["total", "Total"], ["directo", "Directo"], ["paquete", "Paquete"], ["hotel", "Hotel"], ["escala", "Con escala"]];
+  var cols = [["fecha", "Día"], ["total", "Total"], ["directo", "Dir. PUJ"], ["directo_sdq", "Dir. SDQ"], ["paquete", "Paquete"], ["hotel", "Hotel"], ["escala", "Esc. PUJ"], ["escala_sdq", "Esc. SDQ"]];
   var tb = "<tr>" + cols.map(function (c) { return "<th>" + c[1] + "</th>"; }).join("") + "</tr>";
   h.slice().reverse().forEach(function (p) {
     tb += "<tr>" + cols.map(function (c) { return "<td>" + (c[0] === "fecha" ? fecha(p.fecha) : eur(p[c[0]])) + "</td>"; }).join("") + "</tr>";
