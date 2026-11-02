@@ -488,7 +488,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
     var etiquetas = [];
     series.forEach(function (sr) {
       var seg = [], segs = [];
-      h.forEach(function (p, i) { if (p[sr.k] != null) seg.push(x(i).toFixed(1) + "," + y(p[sr.k]).toFixed(1)); else if (seg.length) { segs.push(seg); seg = []; } });
+      h.forEach(function (p, i) { if (p[sr.k] != null) seg.push(x(i).toFixed(1) + "," + y(p[sr.k]).toFixed(1)); });
       if (seg.length) segs.push(seg);
       segs.forEach(function (sg) { if (sg.length > 1) g += '<polyline points="' + sg.join(" ") + '" fill="none" stroke="' + sr.c + '" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"' + (sr.dash ? ' stroke-dasharray="6 5"' : "") + '/>'; });
       for (var i = n - 1; i >= 0; i--) if (h[i][sr.k] != null) {
