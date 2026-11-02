@@ -44,6 +44,8 @@ h2 { font: 700 clamp(1.7rem, 6vw, 2.2rem)/1.1 var(--display); letter-spacing: -0
 .card { background: var(--surface); border-radius: 24px; padding: 30px 28px; }
 .label { font-size: 0.85rem; color: var(--muted); font-weight: 600; }
 
+.alerta { display: block; background: var(--bad); color: #fff; border-radius: 24px; padding: 18px 24px; font-weight: 600; text-align: center; text-decoration: none !important; }
+.alerta::after { content: " ›"; }
 .chollo { background: var(--accent); color: #000; border-radius: 24px; padding: 18px 24px; font-weight: 600; text-align: center; }
 
 .hero { text-align: center; padding: 44px 28px 40px; }
@@ -96,10 +98,6 @@ details[open].card summary::after { transform: rotate(-90deg); }
 .more { list-style: none; margin: 16px 0 0; padding: 0; }
 .more li { display: flex; justify-content: space-between; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); font-size: 0.95rem; }
 .more .p { font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; }
-.tabla { width: 100%; display: block; overflow-x: auto; white-space: nowrap; border-collapse: collapse; margin-top: 16px; font-size: 0.85rem; font-variant-numeric: tabular-nums; }
-.tabla th, .tabla td { padding: 10px 4px; border-top: 1px solid var(--line); text-align: right; }
-.tabla th:first-child, .tabla td:first-child { text-align: left; }
-.tabla th { color: var(--muted); font-weight: 500; }
 
 /* Termómetro de Google */
 .gauge-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
@@ -108,6 +106,9 @@ details[open].card summary::after { transform: rotate(-90deg); }
 .gauge { position: relative; height: 8px; border-radius: 4px; margin: 26px 0 10px; background: linear-gradient(90deg, var(--good) 0 25%, var(--surface-2) 25% 75%, var(--bad) 75%); opacity: 0.9; }
 .gauge b { position: absolute; top: 50%; width: 18px; height: 18px; border-radius: 50%; background: var(--ink); border: 3px solid var(--surface); transform: translate(-50%, -50%); }
 .gauge-legend { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--muted); }
+#ghist { margin-top: 18px; }
+#ghist .label { display: block; margin-bottom: 8px; }
+#ghist svg { width: 100%; height: auto; display: block; overflow: visible; }
 .gauge-note { margin: 16px 0 0; font-size: 0.92rem; color: var(--muted); line-height: 1.55; }
 
 /* Fechas */
@@ -140,24 +141,24 @@ details[open].card summary::after { transform: rotate(-90deg); }
   "actualizado": "2026-11-02",
   "presupuesto": 1500,
   "total_por_persona": null,
-  "total_nota": "Aún no hay precio completo: no hay vuelos directos a la venta ni paquetes u hoteles con precio de agosto 2027.",
+  "total_nota": "Falta que salgan los vuelos directos; el Riu Republica ya está a 877 € por persona (10 noches).",
   "chollo": "",
   "reservar": "Todavía no",
   "reservar_por_que": "No hay vuelos directos ni paquetes de agosto 2027 a la venta; las ofertas de reserva anticipada con vuelo directo suelen salir entre enero y marzo.",
   "vuelo": {
     "precio": null,
-    "texto": "Todavía no hay vuelos directos a Santo Domingo con vuelta desde Punta Cana para agosto 2027. Con escala, desde 1092 €.",
+    "texto": "Todavía no hay vuelos directos a Santo Domingo con vuelta desde Punta Cana para agosto 2027. Con escala, desde 1.092 €.",
     "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhogEgoyMDI3LTA4LTE1KABqBwgBEgNCQ05yBwgBEgNTRFEaIBIKMjAyNy0wOC0yNSgAagcIARIDUFVKcgcIARIDQkNOQAFIAXABmAED&tfu=EgIIAQ"
   },
   "paquete": {
     "precio": null,
-    "texto": "Paquetes con vuelo directo desde Barcelona: aún no a la venta para agosto 2027.",
+    "texto": "Paquete vuelo directo desde Barcelona + Riu Republica: aún no a la venta para agosto 2027.",
     "enlace": "https://www.logitravel.com/viajes/america/republica-dominicana/punta-cana/vuelo-hotel/"
   },
   "hotel": {
-    "precio": null,
-    "texto": "Hoteles de fiesta (Riu Republica, Hard Rock...): aún no a la venta para agosto 2027.",
-    "enlace": "https://www.riu.com/es/hotel/republica-dominicana/punta-cana/"
+    "precio": 877,
+    "texto": "10 noches todo incluido, 15→25 ago, en habitación doble (1.754 € la habitación). Precio normal para este hotel. Más barato en Central de Reservas.",
+    "enlace": "https://www.google.com/travel/search?q=Riu+Republica+Punta+Cana&hl=es&gl=es"
   },
   "mas_opciones": [
     {
@@ -224,7 +225,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
       "fecha": "2026-11-02",
       "total": null,
       "paquete": null,
-      "hotel": null,
+      "hotel": 877,
       "directo": null,
       "escala": 739,
       "directo_sdq": null,
@@ -284,7 +285,10 @@ details[open].card summary::after { transform: rotate(-90deg); }
         "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhogEgoyMDI3LTA4LTIxKABqBwgBEgNCQ05yBwgBEgNTRFEaIBIKMjAyNy0wOC0zMSgAagcIARIDUFVKcgcIARIDQkNOQAFIAXABmAED&tfu=EgIIAQ"
       }
     }
-  ]
+  ],
+  "alerta": "",
+  "alerta_enlace": "",
+  "total_vuelo_hotel": null
 }
 </script>
 
@@ -297,6 +301,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
     <p class="updated" id="updated"></p>
   </header>
 
+  <a class="alerta" id="alerta" target="_blank" rel="noopener" hidden></a>
   <div class="chollo" id="chollo" hidden></div>
 
   <section class="card hero">
@@ -318,6 +323,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
     <div class="gauge" aria-hidden="true"><b id="gpunto"></b></div>
     <div class="gauge-legend"><span>Barato</span><span id="grango"></span><span>Caro</span></div>
     <p class="gauge-note" id="gnota"></p>
+    <div id="ghist"></div>
   </section>
 
   <h2>Lo mejor de hoy</h2>
@@ -334,18 +340,6 @@ details[open].card summary::after { transform: rotate(-90deg); }
     <div id="comparativa"></div>
     <div class="tip" id="tip"></div>
   </section>
-
-  <section class="card chart">
-    <span class="label">Total del viaje frente al tope</span>
-    <p class="hint">Vuelo directo + hotel, o paquete. Solo con precios reales de agosto 2027.</p>
-    <div id="totalchart"></div>
-    <div class="tip" id="tip2"></div>
-  </section>
-
-  <details class="card">
-    <summary>Ver todos los datos</summary>
-    <table class="tabla" id="tabla"></table>
-  </details>
 
   <details class="card">
     <summary>Más opciones</summary>
@@ -364,6 +358,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
   var h = D.historico || [];
 
   $("updated").textContent = "Actualizado el " + new Date(D.actualizado + "T12:00:00").toLocaleDateString("es-ES", { day: "numeric", month: "long" });
+  if (D.alerta) { var al = $("alerta"); al.hidden = false; al.textContent = "🚨 " + D.alerta; al.href = D.alerta_enlace || "#"; }
   if (D.chollo) { $("chollo").hidden = false; $("chollo").textContent = "🔥 Chollo · " + D.chollo; }
 
   // Hero
@@ -386,7 +381,7 @@ details[open].card summary::after { transform: rotate(-90deg); }
   $("why").textContent = D.reservar_por_que;
 
   // Tarjetas
-  [["✈️", "Vuelo directo Santo Domingo + Punta Cana", D.vuelo, "Ver vuelos"], ["🏝️", "Paquete con vuelo directo", D.paquete, "Ver ofertas"], ["🎉", "Hotel de fiesta", D.hotel, "Ver hotel"]].forEach(function (p) {
+  [["✈️", "Vuelo directo Santo Domingo + Punta Cana", D.vuelo, "Ver vuelos"], ["🏝️", "Paquete con vuelo directo", D.paquete, "Ver ofertas"], ["🎉", "Riu Republica · por persona", D.hotel, "Ver precios"]].forEach(function (p) {
     var el = document.createElement("article");
     el.className = "card pick";
     el.innerHTML = '<span class="icon"></span><span class="kind"></span><span class="price"></span><span class="what"></span><a target="_blank" rel="noopener"></a>';
@@ -424,6 +419,17 @@ details[open].card summary::after { transform: rotate(-90deg); }
     $("gpunto").style.left = (pos * 100) + "%";
     $("grango").textContent = "Lo normal: " + eur(a) + " – " + eur(b);
     $("gnota").textContent = "Referencia: ida y vuelta a Punta Cana " + G.tipo + ", " + eur(G.precio) + ", salida " + fecha(G.ida) + ". Google solo valora vuelos de ida y vuelta, no el combinado con Santo Domingo, pero sirve para saber si los precios a la isla están altos o bajos.";
+    var GH = G.historial || [];
+    if (GH.length > 2) {
+      var hw = 600, hh = 90, vs = GH.map(function (p) { return p[1]; });
+      var mn = Math.min.apply(null, vs), mx = Math.max.apply(null, vs); if (mx === mn) mx = mn + 1;
+      var px = function (i) { return i * hw / (GH.length - 1); }, py = function (v) { return 8 + (mx - v) * (hh - 16) / (mx - mn); };
+      var pts = GH.map(function (p, i) { return px(i).toFixed(1) + "," + py(p[1]).toFixed(1); }).join(" ");
+      $("ghist").innerHTML = '<span class="label">Lo que ha hecho este precio según Google</span>' +
+        '<svg viewBox="0 0 ' + hw + ' ' + hh + '" preserveAspectRatio="none" style="height:70px" role="img" aria-label="Historial de precio en Google Flights">' +
+        '<polyline points="' + pts + '" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>' +
+        '<div class="gauge-legend" style="margin-top:6px"><span>' + fecha(GH[0][0]) + ' · ' + eur(GH[0][1]) + '</span><span>mín ' + eur(mn) + ' · máx ' + eur(mx) + '</span><span>hoy · ' + eur(GH[GH.length - 1][1]) + '</span></div>';
+    }
   }
 
   // Comparativa por fecha de salida y ruta
@@ -535,18 +541,10 @@ details[open].card summary::after { transform: rotate(-90deg); }
   });
   function dibujar() {
     grafica($("comparativa"), $("tip"), SERIES, null);
-    grafica($("totalchart"), $("tip2"), [{ k: "total", n: "Total viaje", c: "var(--accent)" }], D.presupuesto);
   }
   dibujar();
   var ancho = window.innerWidth;
   window.addEventListener("resize", function () { if (window.innerWidth !== ancho) { ancho = window.innerWidth; dibujar(); } });
 
-  // Tabla con todos los datos (también para quien no vea bien los colores)
-  var cols = [["fecha", "Día"], ["total", "Total"], ["directo_sdq", "Dir. SDQ"], ["directo", "Dir. PUJ"], ["paquete", "Paquete"], ["hotel", "Hotel"], ["escala_sdq", "Esc. SDQ"], ["escala", "Esc. PUJ"]];
-  var tb = "<tr>" + cols.map(function (c) { return "<th>" + c[1] + "</th>"; }).join("") + "</tr>";
-  h.slice().reverse().forEach(function (p) {
-    tb += "<tr>" + cols.map(function (c) { return "<td>" + (c[0] === "fecha" ? fecha(p.fecha) : eur(p[c[0]])) + "</td>"; }).join("") + "</tr>";
-  });
-  $("tabla").innerHTML = tb;
 })();
 </script>
