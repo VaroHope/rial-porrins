@@ -138,16 +138,16 @@ details[open].card summary::after { transform: rotate(-90deg); }
 <!-- DATOS: lo único que cambia cada día. El resto de la página no se toca. -->
 <script id="datos" type="application/json">
 {
-  "actualizado": "2026-11-23",
+  "actualizado": "2026-11-24",
   "presupuesto": 1500,
   "total_por_persona": null,
-  "total_nota": "Falta que salgan los vuelos directos y los paquetes; el Riu Republica ya está a 844 € por persona (10 noches).",
+  "total_nota": "Falta que salgan los vuelos directos y los paquetes; el Riu Republica sigue a 844 € por persona (10 noches).",
   "chollo": "",
   "reservar": "Todavía no",
-  "reservar_por_que": "Aún no hay vuelos directos desde Barcelona ni paquetes para agosto 2027; suelen salir entre enero y marzo. El hotel ha bajado a 844 €: buena señal.",
+  "reservar_por_que": "Aún no hay vuelos directos desde Barcelona ni paquetes para agosto 2027; suelen salir entre enero y marzo. De momento, a esperar.",
   "vuelo": {
     "precio": null,
-    "texto": "Todavía no hay vuelos directos a Santo Domingo con vuelta desde Punta Cana para agosto 2027. Con escala, desde 1.275 € (American, 15→25 ago; precio del 22 nov).",
+    "texto": "Todavía no hay vuelos directos a Santo Domingo con vuelta desde Punta Cana para agosto 2027. Con escala, desde 1.234 € (Air Europa, 15→25 ago).",
     "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhogEgoyMDI3LTA4LTE1KABqBwgBEgNCQ05yBwgBEgNTRFEaIBIKMjAyNy0wOC0yNSgAagcIARIDUFVKcgcIARIDQkNOQAFIAXABmAED&tfu=EgIIAQ"
   },
   "paquete": {
@@ -162,23 +162,23 @@ details[open].card summary::after { transform: rotate(-90deg); }
   },
   "mas_opciones": [
     {
-      "nombre": "American · con escala (referencia), ida Santo Domingo / vuelta Punta Cana, 15→25 ago (precio del 22 nov)",
-      "precio": 1275,
+      "nombre": "Air Europa · con escala (referencia), ida Santo Domingo / vuelta Punta Cana, 15→25 ago",
+      "precio": 1234,
       "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDU0RRGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQM&tfu=EgIIAQ"
     },
     {
-      "nombre": "JetBlue · con escala (referencia), ida Santo Domingo / vuelta Punta Cana, 15→25 ago (precio del 22 nov)",
-      "precio": 1314,
+      "nombre": "British Airways + American · con escala (referencia), ida Santo Domingo / vuelta Punta Cana, 15→25 ago",
+      "precio": 1245,
       "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDU0RRGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQM&tfu=EgIIAQ"
     },
     {
-      "nombre": "Air Europa · con escala (referencia), ida Santo Domingo / vuelta Punta Cana, 15→25 ago (precio del 22 nov)",
-      "precio": 1320,
-      "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDU0RRGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQM&tfu=EgIIAQ"
+      "nombre": "Air Transat · con escala (referencia), Punta Cana i/v, 15→25 ago",
+      "precio": 741,
+      "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDUFVKGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQE&tfu=EgIIAQ"
     },
     {
-      "nombre": "Air Canada · con escala (referencia), Punta Cana i/v, 15→25 ago (precio del 22 nov)",
-      "precio": 1061,
+      "nombre": "Air Europa · con escala (referencia, el más rápido), Punta Cana i/v, 15→25 ago",
+      "precio": 1080,
       "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhoeEgoyMDI3LTA4LTE1agcIARIDQkNOcgcIARIDUFVKGh4SCjIwMjctMDgtMjVqBwgBEgNQVUpyBwgBEgNCQ05AAUgBcAGYAQE&tfu=EgIIAQ"
     },
     {
@@ -415,11 +415,21 @@ details[open].card summary::after { transform: rotate(-90deg); }
       "hotel": 844,
       "directo": null,
       "directo_sdq": null
+    },
+    {
+      "fecha": "2026-11-24",
+      "total": null,
+      "paquete": null,
+      "hotel": null,
+      "directo": null,
+      "directo_sdq": null,
+      "escala": 741,
+      "escala_sdq": 1234
     }
   ],
   "google": {
-    "precio": 1061,
-    "nivel": "high",
+    "precio": 741,
+    "nivel": "typical",
     "rango": [
       730,
       1050
@@ -433,12 +443,12 @@ details[open].card summary::after { transform: rotate(-90deg); }
       "vuelta": "2027-08-25",
       "puj": {
         "directo": null,
-        "escala": null,
+        "escala": 741,
         "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhogEgoyMDI3LTA4LTE1KABqBwgBEgNCQ05yBwgBEgNQVUoaIBIKMjAyNy0wOC0yNSgAagcIARIDUFVKcgcIARIDQkNOQAFIAXABmAEB&tfu=EgIIAQ"
       },
       "sdq": {
         "directo": null,
-        "escala": null,
+        "escala": 1234,
         "enlace": "https://www.google.com/travel/flights?hl=es&gl=es&curr=EUR&tfs=CBwQAhogEgoyMDI3LTA4LTE1KABqBwgBEgNCQ05yBwgBEgNTRFEaIBIKMjAyNy0wOC0yNSgAagcIARIDUFVKcgcIARIDQkNOQAFIAXABmAED&tfu=EgIIAQ"
       }
     },
